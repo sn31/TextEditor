@@ -655,34 +655,107 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="419" y="310" width="700" height="500"/>
+                        <rect key="contentRect" x="419" y="310" width="700" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="27A38072-2DD2-44D4-A0F5-384532CC5314" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="1cF-aq-Fgt">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="5uj-e5-117"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="VfF-1u-9CZ"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="pnN-lH-CM6"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Lp8-lG-ZLD"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="z37-IQ-vTU"/>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="5uj-e5-117"/>
-                                <toolbarItem reference="VfF-1u-9CZ"/>
-                                <toolbarItem reference="z37-IQ-vTU"/>
-                                <toolbarItem reference="pnN-lH-CM6"/>
-                            </defaultToolbarItems>
-                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="g8i-YA-Ieb"/>
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="4b4-ym-aZH" kind="relationship" relationship="window.shadowedContentViewController" id="gY9-TD-Xjh"/>
+                        <segue destination="0Yc-V0-gpp" kind="relationship" relationship="window.shadowedContentViewController" id="p5Q-SA-uux"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="XhO-Na-EJz">
+            <objects>
+                <splitViewController id="0Yc-V0-gpp" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem id="YNO-r3-O1X"/>
+                        <splitViewItem id="crE-bU-3au"/>
+                    </splitViewItems>
+                    <splitView key="splitView" dividerStyle="thin" id="jEA-zz-WcM">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="0Yc-V0-gpp" id="DZV-Mh-qgp"/>
+                        </connections>
+                    </splitView>
+                    <connections>
+                        <outlet property="splitView" destination="jEA-zz-WcM" id="Mhl-y7-zKS"/>
+                        <segue destination="EBC-Cv-FGB" kind="relationship" relationship="splitItems" id="OHD-vz-aF3"/>
+                        <segue destination="4b4-ym-aZH" kind="relationship" relationship="splitItems" id="zDe-IH-5EN"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="e2I-Ey-dpw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-597" y="688"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ydw-4g-q8a">
+            <objects>
+                <viewController id="EBC-Cv-FGB" sceneMemberID="viewController">
+                    <customView key="view" id="1nh-5u-z7v">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t7w-9K-WQY">
+                                <rect key="frame" x="5" y="1" width="60" height="25"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" preferredEdge="minX" selectedItem="E65-sI-EbM" id="QMl-2u-w1t">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="fZQ-Zm-69e">
+                                        <items>
+                                            <menuItem state="on" image="icons8-opened-folder-50" hidden="YES" id="E65-sI-EbM"/>
+                                            <menuItem title="Hide Editor Bar" id="Jix-Hi-qgj"/>
+                                            <menuItem title="Item 3" id="hfi-lU-HdR"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <color key="contentTintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7DL-lt-sWj">
+                                <rect key="frame" x="70" y="1" width="60" height="25"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" preferredEdge="minX" selectedItem="aDB-Kg-NyX" id="UfN-jv-gZq">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="cjR-xB-bDD">
+                                        <items>
+                                            <menuItem state="on" image="icons8-add-new-50" hidden="YES" id="aDB-Kg-NyX"/>
+                                            <menuItem title="New Project" id="fOM-15-feb"/>
+                                            <menuItem title="Import Webpage" id="nDe-9q-PVi"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfd-Wt-Pje">
+                                <rect key="frame" x="195" y="4" width="197" height="22"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="Ugt-1L-ssY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </searchFieldCell>
+                            </searchField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lla-hW-fQA">
+                                <rect key="frame" x="130" y="-3" width="60" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="icons8-waste-64" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6id-7H-GlM">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                </viewController>
+                <customObject id="kYF-DT-uKP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-597" y="213"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="0VY-3K-8bI">
@@ -804,4 +877,9 @@
             <point key="canvasLocation" x="1140" y="934"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icons8-add-new-50" width="37.5" height="37.5"/>
+        <image name="icons8-opened-folder-50" width="128" height="128"/>
+        <image name="icons8-waste-64" width="128" height="128"/>
+    </resources>
 </document>
