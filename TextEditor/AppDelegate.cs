@@ -1,11 +1,13 @@
 ﻿using AppKit;
 using Foundation;
+using System.IO;
 
 namespace TextEditor
 {
     [Register("AppDelegate")]
     public class AppDelegate : NSApplicationDelegate
     {
+        public int UntitledWindowCount { get; set; } = 1;
         public AppDelegate()
         {
         }
@@ -14,6 +16,19 @@ namespace TextEditor
         {
             // Insert code here to initialize your application
         }
+        public override void WillTerminate(NSNotification notification)
+        {
+            // Insert code here to tear down your application
+        }
+        [Export("newDocument:")]
+        void Newdocument(NSObject sender)
+        {
+            var storyboard = NSStoryboard.FromName("Main", null);
+            var controller = storyboard.InstantiateControllerWithIdentifier("MainWindow") as NSWindowController;
+            controller.ShowWindow(this);
+            controller.Window.Title = (++UntitledWindowCount == 1) ? "untitled" : string.Format("untitle {0}", UntitledWindowCount);
+        }
+
         [Export("openDocument:")]
         void OpenDialog(NSObject sender)
         {
@@ -32,9 +47,6 @@ namespace TextEditor
                 alert.RunModal();
             }
         }
-        public override void WillTerminate(NSNotification notification)
-        {
-            // Insert code here to tear down your application
-        }
+       
     }
 }
