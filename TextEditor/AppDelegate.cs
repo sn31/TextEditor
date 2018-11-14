@@ -38,19 +38,31 @@ namespace TextEditor
         [Export("openDocument:")]
         void OpenDialog(NSObject sender)
         {
+
             var dlg = NSOpenPanel.OpenPanel;
-            dlg.CanChooseFiles = false;
-            dlg.CanChooseDirectories = true;
+            dlg.CanChooseFiles = true;
+            dlg.CanChooseDirectories = false;
 
             if (dlg.RunModal() == 1)
             {
-                var alert = new NSAlert()
+                var url = dlg.Urls[0];
+                if (url != null)
                 {
-                    AlertStyle = NSAlertStyle.Informational,
-                    InformativeText = "At this point we should do something with the folder that the user just selected in the Open File Dialog box...",
-                    MessageText = "Folder Selected"
-                };
-                alert.RunModal();
+                    var path = url.Path;
+
+                    var storyboard = NSStoryboard.FromName("Main", null);
+                    var controller = storyboard.InstantiateControllerWithIdentifier("MainWindow") as NSWindowController;
+
+                    // Display
+                    controller.ShowWindow(this);
+
+                    // Load the text into the window
+
+                    var viewController = controller.Window.ContentViewController as ViewController;
+                    viewController.Text = File.ReadAllText(path);
+                    viewController.View.Window.SetTitleWithRepresentedFilename(Path.GetFileName(path));
+                    viewController.View.Window.RepresentedUrl = url;
+                }
             }
         }
        
