@@ -7,7 +7,9 @@ namespace TextEditor
     [Register("AppDelegate")]
     public class AppDelegate : NSApplicationDelegate
     {
+       
         public int UntitledWindowCount { get; set; } = 1;
+       
         public AppDelegate()
         {
         }
@@ -34,6 +36,55 @@ namespace TextEditor
             // Set the title
             controller.Window.Title = (++UntitledWindowCount == 1) ? "untitled" : string.Format("untitled {0}", UntitledWindowCount);
         }
+        private bool OpenFile(NSUrl url)
+        {
+            var good = false;
+
+            // Trap all errors
+            try
+            {
+                var path = url.Path;
+
+                //Is the file already open?
+                foreach (NSWindow window in NSApplication.SharedApplication.Windows)
+                {
+                    var content = window.ContentViewController as ViewController;
+                    if (content != null && path == content.FilePath)
+                    {
+                        // Bring window to front
+                        window.MakeKeyAndOrderFront(this);
+                        return true;
+                    }
+                }
+
+                // Get new window
+                var storyboard = NSStoryboard.FromName("Main", null);
+                var controller = storyboard.InstantiateControllerWithIdentifier("MainWindow") as NSWindowController;
+
+                // Display
+                controller.ShowWindow(this);
+
+                // Load the text into the window
+                var viewController = controller.Window.ContentViewController as ViewController;
+                viewController.Text = File.ReadAllText(path);
+                viewController.View.Window.SetTitleWithRepresentedFilename(Path.GetFileName(path));
+                viewController.View.Window.RepresentedUrl = url;
+
+                // Add document to the Open Recent menu
+                NSDocumentController.SharedDocumentController.NoteNewRecentDocumentURL(url);
+
+                // Make as successful
+                good = true;
+            }
+            catch
+            {
+                // Mark as bad file on error
+                good = false;
+            }
+
+            // Return results
+            return good;
+        }
 
         [Export("openDocument:")]
         void OpenDialog(NSObject sender)
@@ -48,20 +99,7 @@ namespace TextEditor
                 var url = dlg.Urls[0];
                 if (url != null)
                 {
-                    var path = url.Path;
-
-                    var storyboard = NSStoryboard.FromName("Main", null);
-                    var controller = storyboard.InstantiateControllerWithIdentifier("MainWindow") as NSWindowController;
-
-                    // Display
-                    controller.ShowWindow(this);
-
-                    // Load the text into the window
-
-                    var viewController = controller.Window.ContentViewController as ViewController;
-                    viewController.Text = File.ReadAllText(path);
-                    viewController.View.Window.SetTitleWithRepresentedFilename(Path.GetFileName(path));
-                    viewController.View.Window.RepresentedUrl = url;
+                    OpenFile(url);
                 }
             }
         }

@@ -7,17 +7,7 @@ namespace TextEditor
 {
     public partial class ViewController : NSViewController
     {
-        public ViewController(IntPtr handle) : base(handle)
-        {
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            // Do any additional setup after loading the view.
-        }
-
+        #region Computed Properties
         public override NSObject RepresentedObject
         {
             get
@@ -30,35 +20,59 @@ namespace TextEditor
                 // Update the view, if already loaded.
             }
         }
-        public bool DocumentEdited {
+
+        public bool DocumentEdited
+        {
             get { return View.Window.DocumentEdited; }
             set { View.Window.DocumentEdited = value; }
         }
+
         public string Text
         {
             get { return DocumentEditor.Value; }
             set { DocumentEditor.Value = value; }
         }
+
+        #endregion
+        #region Constructors
+        public ViewController(IntPtr handle) : base(handle)
+        {
+        }
+        #endregion
+
+        public string FilePath { get; set; } = "";
+
+        #region Override Methods
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            // Do any additional setup after loading the view.
+
+        }
+
         public override void ViewWillAppear()
         {
             base.ViewWillAppear();
 
+            // Set Window Title
             this.View.Window.Title = "untitled";
 
-            View.Window.WillClose += (sender, e) =>
-            {
+            View.Window.WillClose += (sender, e) => {
+                // is the window dirty?
                 if (DocumentEdited)
                 {
                     var alert = new NSAlert()
                     {
                         AlertStyle = NSAlertStyle.Critical,
-                        InformativeText = "Save document before closing?",
+                        InformativeText = "We need to give the user the ability to save the document here...",
                         MessageText = "Save Document",
                     };
                     alert.RunModal();
                 }
             };
         }
+
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
@@ -74,6 +88,9 @@ namespace TextEditor
                 return true;
             };
 
+
         }
+        #endregion
+
     }
 }
