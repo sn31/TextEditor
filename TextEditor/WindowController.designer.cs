@@ -9,18 +9,12 @@ using System.CodeDom.Compiler;
 
 namespace TextEditor
 {
-	[Register ("ViewController")]
-	partial class ViewController
+	[Register ("WindowController")]
+	partial class WindowController
 	{
-		[Outlet]
-		AppKit.NSTextView DocumentEditor { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (DocumentEditor != null) {
-				DocumentEditor.Dispose ();
-				DocumentEditor = null;
-			}
 		}
 	}
 }

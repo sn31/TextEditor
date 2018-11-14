@@ -20,13 +20,19 @@ namespace TextEditor
         {
             // Insert code here to tear down your application
         }
+       
         [Export("newDocument:")]
-        void Newdocument(NSObject sender)
+        void NewDocument(NSObject sender)
         {
+            // Get new window
             var storyboard = NSStoryboard.FromName("Main", null);
             var controller = storyboard.InstantiateControllerWithIdentifier("MainWindow") as NSWindowController;
+
+            // Display
             controller.ShowWindow(this);
-            controller.Window.Title = (++UntitledWindowCount == 1) ? "untitled" : string.Format("untitle {0}", UntitledWindowCount);
+
+            // Set the title
+            controller.Window.Title = (++UntitledWindowCount == 1) ? "untitled" : string.Format("untitled {0}", UntitledWindowCount);
         }
 
         [Export("openDocument:")]
