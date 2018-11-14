@@ -92,7 +92,8 @@
                                         </menuItem>
                                         <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                             <connections>
-                                                <action selector="saveDocument:" target="Ady-hI-5gd" id="teZ-XB-qJY"/>
+                                                <action selector="saveDocument:" target="Ady-hI-5gd" id="66s-dO-WXH"/>
+                                                <segue destination="B8D-0N-5wS" kind="custom" id="87D-bq-0bf"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Save As…" keyEquivalent="S" id="Bw7-FT-i3A">
@@ -706,8 +707,8 @@
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t7w-9K-WQY">
                                 <rect key="frame" x="5" y="1" width="60" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" preferredEdge="minX" selectedItem="E65-sI-EbM" id="QMl-2u-w1t">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" userInterfaceLayoutDirection="rightToLeft" imageScaling="proportionallyDown" inset="2" pullsDown="YES" preferredEdge="minX" selectedItem="E65-sI-EbM" id="QMl-2u-w1t">
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="fZQ-Zm-69e">
                                         <items>
@@ -750,6 +751,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="delete:" target="kYF-DT-uKP" id="fIS-EE-EIt"/>
+                                </connections>
                             </button>
                         </subviews>
                     </customView>
@@ -974,4 +978,7 @@
         <image name="icons8-opened-folder-50" width="37.5" height="37.5"/>
         <image name="icons8-waste-64" width="48" height="48"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="87D-bq-0bf"/>
+    </inferredMetricsTieBreakers>
 </document>

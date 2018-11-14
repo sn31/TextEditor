@@ -48,8 +48,7 @@ namespace TextEditor
                 //Is the file already open?
                 foreach (NSWindow window in NSApplication.SharedApplication.Windows)
                 {
-                    var content = window.ContentViewController as ViewController;
-                    if (content != null && path == content.FilePath)
+                    if (window.ContentViewController is ViewController content && path == content.FilePath)
                     {
                         // Bring window to front
                         window.MakeKeyAndOrderFront(this);
