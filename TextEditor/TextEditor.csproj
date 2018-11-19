@@ -81,6 +81,10 @@
     <Compile Include="WindowController.designer.cs">
       <DependentUpon>WindowController.cs</DependentUpon>
     </Compile>
+    <Compile Include="SourceListItem.cs" />
+    <Compile Include="SourceListDataSource.cs" />
+    <Compile Include="SourceListDelegate.cs" />
+    <Compile Include="SourceListView.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

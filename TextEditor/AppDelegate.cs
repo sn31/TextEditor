@@ -17,7 +17,7 @@ namespace TextEditor
 
         public override void DidFinishLaunching(NSNotification notification)
         {
-
+           
         }
         public override void WillTerminate(NSNotification notification)
         {
@@ -41,6 +41,7 @@ namespace TextEditor
         }
         private bool OpenFile(NSUrl url)
         {
+            Console.WriteLine("OpenFile is ran");
             var good = false;
 
             // Trap all errors
@@ -58,17 +59,17 @@ namespace TextEditor
                         return true;
                     }
                 }
-
+               
                 // Get new window
                 var storyboard = NSStoryboard.FromName("Main", null);
                 var controller = storyboard.InstantiateControllerWithIdentifier("MainWindow") as NSWindowController;
 
                 // Display
                 controller.ShowWindow(this);
-
-                // Load the text into the window
+                Console.WriteLine(File.ReadAllText(path));
+                // Load the text into the window - Does not work properly.
                 var viewController = controller.Window.ContentViewController as ViewController;
-                viewController.Text = File.ReadAllText(path);
+                viewController.Text = File.ReadAllText(path); 
                 viewController.View.Window.SetTitleWithRepresentedFilename(Path.GetFileName(path));
                 viewController.View.Window.RepresentedUrl = url;
 
@@ -91,10 +92,10 @@ namespace TextEditor
         [Export("openDocument:")]
         void OpenDialog(NSObject sender)
         {
-
+            Console.WriteLine("OpenDialog is ran");
             var dlg = NSOpenPanel.OpenPanel;
             dlg.CanChooseFiles = true;
-            dlg.CanChooseDirectories = false;
+            dlg.CanChooseDirectories = true;
 
             if (dlg.RunModal() == 1)
             {
