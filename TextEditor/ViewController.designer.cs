@@ -14,20 +14,12 @@ namespace TextEditor
 	{
 		[Outlet]
 		AppKit.NSTextView DocumentEditor { get; set; }
-
-		[Outlet]
-		Foundation.NSObject SourceList { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
 			if (DocumentEditor != null) {
 				DocumentEditor.Dispose ();
 				DocumentEditor = null;
-			}
-
-			if (SourceList != null) {
-				SourceList.Dispose ();
-				SourceList = null;
 			}
 		}
 	}

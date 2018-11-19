@@ -789,7 +789,7 @@
         <!--View Controller-->
         <scene sceneID="ey7-Rl-Umh">
             <objects>
-                <viewController id="Vvq-jn-Oia" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="Vvq-jn-Oia" sceneMemberID="viewController">
                     <view key="view" id="6lC-gb-d2d">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
