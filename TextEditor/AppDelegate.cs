@@ -1,6 +1,7 @@
 ﻿using AppKit;
 using Foundation;
 using System.IO;
+using System;
 
 namespace TextEditor
 {
@@ -16,7 +17,7 @@ namespace TextEditor
 
         public override void DidFinishLaunching(NSNotification notification)
         {
-            // Insert code here to initialize your application
+
         }
         public override void WillTerminate(NSNotification notification)
         {
@@ -32,9 +33,11 @@ namespace TextEditor
 
             // Display
             controller.ShowWindow(this);
-
+            Console.WriteLine(UntitledWindowCount);
             // Set the title
             controller.Window.Title = (++UntitledWindowCount == 1) ? "untitled" : string.Format("untitled {0}", UntitledWindowCount);
+            Console.WriteLine(UntitledWindowCount);
+
         }
         private bool OpenFile(NSUrl url)
         {

@@ -63,7 +63,6 @@
                                         <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl">
                                             <connections>
                                                 <action selector="newDocument:" target="Ady-hI-5gd" id="9N2-vv-3aL"/>
-                                                <segue destination="B8D-0N-5wS" kind="show" id="JDZ-CW-3HZ"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
@@ -648,7 +647,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="80" y="-148"/>
+            <point key="canvasLocation" x="88" y="-316"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -978,7 +977,4 @@
         <image name="icons8-opened-folder-50" width="37.5" height="37.5"/>
         <image name="icons8-waste-64" width="48" height="48"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="87D-bq-0bf"/>
-    </inferredMetricsTieBreakers>
 </document>
