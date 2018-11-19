@@ -69,6 +69,7 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
