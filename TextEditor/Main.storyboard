@@ -892,7 +892,7 @@
                 </viewController>
                 <customObject id="gQa-hI-um4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="631" y="374"/>
+            <point key="canvasLocation" x="709" y="368"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="6Y8-xp-LhJ">
@@ -922,7 +922,7 @@
         <!--View Controller-->
         <scene sceneID="cT6-Re-KgQ">
             <objects>
-                <viewController id="2Tn-xf-XCO" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DocumentEditor" id="2Tn-xf-XCO" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="kM5-tE-kYI">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>

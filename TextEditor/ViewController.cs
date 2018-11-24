@@ -47,7 +47,6 @@ namespace TextEditor
             base.ViewDidLoad();
 
         }
-
         public override void ViewWillAppear()
         {
             base.ViewWillAppear();
@@ -68,11 +67,12 @@ namespace TextEditor
                     alert.RunModal();
                 }
             };
-        }
+        } 
 
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
+            Console.WriteLine("{0}", this.GetHashCode());
 
             // Show when the document is edited
             DocumentEditor.TextDidChange += (sender, e) => {

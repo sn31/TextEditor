@@ -3,6 +3,7 @@ using Foundation;
 using System.IO;
 using System;
 
+
 namespace TextEditor
 {
     [Register("AppDelegate")]
@@ -33,20 +34,37 @@ namespace TextEditor
 
             // Display
             controller.ShowWindow(this);
-            Console.WriteLine(UntitledWindowCount);
+
             // Set the title
             controller.Window.Title = (++UntitledWindowCount == 1) ? "untitled" : string.Format("untitled {0}", UntitledWindowCount);
-            Console.WriteLine(UntitledWindowCount);
 
         }
+
+        private ViewController FindViewController(NSViewController root)
+        {
+            foreach (var controller in root.ChildViewControllers)
+            {
+                if (controller is ViewController)
+                {
+                    return controller as ViewController;
+                }
+
+                if (controller.ChildViewControllers.Length > 0) {
+                    var result = FindViewController(controller);
+                    if (result != null) {
+                        return result;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         private bool OpenFile(NSUrl url)
         {
             Console.WriteLine("OpenFile is ran");
             var good = false;
 
-            // Trap all errors
-            try
-            {
                 var path = url.Path;
 
                 //Is the file already open?
@@ -63,12 +81,11 @@ namespace TextEditor
                 // Get new window
                 var storyboard = NSStoryboard.FromName("Main", null);
                 var controller = storyboard.InstantiateControllerWithIdentifier("MainWindow") as NSWindowController;
+                var viewController = FindViewController(controller.ContentViewController);
 
                 // Display
                 controller.ShowWindow(this);
-                Console.WriteLine(File.ReadAllText(path));
-                // Load the text into the window - Does not work properly.
-                var viewController = controller.Window.ContentViewController as ViewController;
+              
                 viewController.Text = File.ReadAllText(path); 
                 viewController.View.Window.SetTitleWithRepresentedFilename(Path.GetFileName(path));
                 viewController.View.Window.RepresentedUrl = url;
@@ -78,13 +95,7 @@ namespace TextEditor
 
                 // Make as successful
                 good = true;
-            }
-            catch
-            {
-                // Mark as bad file on error
-                good = false;
-            }
-
+            
             // Return results
             return good;
         }
