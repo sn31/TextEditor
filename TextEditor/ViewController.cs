@@ -45,7 +45,6 @@ namespace TextEditor
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
         }
         public override void ViewWillAppear()
         {
@@ -72,7 +71,6 @@ namespace TextEditor
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
-            Console.WriteLine("{0}", this.GetHashCode());
 
             // Show when the document is edited
             DocumentEditor.TextDidChange += (sender, e) => {
@@ -84,6 +82,7 @@ namespace TextEditor
             DocumentEditor.ShouldChangeTextInRanges += (NSTextView view, NSValue[] values, string[] replacements) => {
                 return true;
             };
+
 
         }
         #endregion

@@ -86,9 +86,14 @@
     <Compile Include="SourceListDataSource.cs" />
     <Compile Include="SourceListDelegate.cs" />
     <Compile Include="SourceListView.cs" />
+    <Compile Include="ExplorerViewController.cs" />
+    <Compile Include="ExplorerViewController.designer.cs">
+      <DependentUpon>ExplorerViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="ExplorerViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icons8-add-new-50.png" />
