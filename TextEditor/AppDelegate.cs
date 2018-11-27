@@ -24,6 +24,18 @@ namespace TextEditor
         {
             // Insert code here to tear down your application
         }
+
+
+        public override NSApplicationTerminateReply ApplicationShouldTerminate(NSApplication sender)
+        {
+            foreach (NSWindow window in NSApplication.SharedApplication.Windows){
+                if (window.Delegate != null && !window.Delegate.WindowShouldClose(this)){
+                    return NSApplicationTerminateReply.Cancel;
+                }
+            }
+            Console.WriteLine("Application should terminate");
+            return NSApplicationTerminateReply.Now;
+        }
        
         [Export("newDocument:")]
         void NewDocument(NSObject sender)
