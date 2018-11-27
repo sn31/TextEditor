@@ -3,11 +3,12 @@
 using System;
 using Foundation;
 using AppKit;
+using System.IO;
 
 
 namespace TextEditor
 {
-	public partial class WindowController : NSWindowController
+	public partial class WindowController : NSWindowController //TextEditorWindowController
 	{
 		public WindowController (IntPtr handle) : base (handle)
 		{
@@ -17,5 +18,40 @@ namespace TextEditor
             base.WindowDidLoad();
             Window.Delegate = new EditorWindowDelegate(Window);
         }
+        public void SaveDocument()
+        {
+            var EditorViewController = AppDelegate.FindViewController(Window.ContentViewController) as ViewController;
+            if (Window.RepresentedUrl != null )
+            {
+                var path = Window.RepresentedUrl.Path;
+                File.WriteAllText(path, EditorViewController.Text);
+            }
+            else{
+                var dlg = new NSSavePanel()
+                {
+                    Title = "Save Document"
+                };
+                dlg.BeginSheet(Window, (rslt) =>
+                {
+                    if (rslt == 1)
+                    {
+                        var path = dlg.Url.Path;
+                        File.WriteAllText(path, EditorViewController.Text);
+                        Window.DocumentEdited = false;
+                        EditorViewController.View.Window.SetTitleWithRepresentedFilename(Path.GetFileName(path));
+                        EditorViewController.View.Window.RepresentedUrl = dlg.Url;
+                        EditorViewController.FilePath = path;
+
+                        NSDocumentController.SharedDocumentController.NoteNewRecentDocumentURL(dlg.Url);
+                    }
+                });
+            }
+        }
+        [Action("saveDocument:")]
+        public void SaveDocument(NSObject sender)
+        {
+            SaveDocument();
+        }
     }
 }
+
