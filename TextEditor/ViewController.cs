@@ -49,6 +49,8 @@ namespace TextEditor
         public override void ViewWillAppear()
         {
             base.ViewWillAppear();
+            this.View.Window.Title = "untitled";
+
         } 
 
         public override void AwakeFromNib()
