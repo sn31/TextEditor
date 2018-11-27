@@ -52,7 +52,7 @@ namespace TextEditor
 
         }
 
-        private ViewController FindViewController(NSViewController root)
+        public static ViewController FindViewController(NSViewController root)
         {
             foreach (var controller in root.ChildViewControllers)
             {

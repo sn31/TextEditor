@@ -3,7 +3,7 @@
 using System;
 using Foundation;
 using AppKit;
-using TextEditor.Classes;
+
 
 namespace TextEditor
 {

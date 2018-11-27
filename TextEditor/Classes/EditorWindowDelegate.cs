@@ -3,7 +3,7 @@ using AppKit;
 using System.IO;
 using Foundation;
 
-namespace TextEditor.Classes
+namespace TextEditor
 {
     public class EditorWindowDelegate : NSWindowDelegate
     {
@@ -12,7 +12,7 @@ namespace TextEditor.Classes
         {
             this.Window = window;
         }
-
+      
         public override bool WindowShouldClose(Foundation.NSObject sender){
             if (Window.DocumentEdited)
             {
@@ -32,16 +32,20 @@ namespace TextEditor.Classes
                 {
                     case 1000:
                         //Saving
-                        var viewController = Window.ContentViewController as ViewController;
-
+                        Console.WriteLine("Before defining the view controller");
+                        var viewController = AppDelegate.FindViewController(Window.ContentViewController) as ViewController;
+                        Console.WriteLine(viewController);
                         if (Window.RepresentedUrl != null) {
                             var path = Window.RepresentedUrl.Path;
                             File.WriteAllText(path, viewController.Text);
                             return true;
                         }
                         else {
-                            var dlg = new NSSavePanel();
-                            dlg.Title = "Save Document";
+                            Console.WriteLine("Stuff needs to be saved");
+                            var dlg = new NSSavePanel
+                            {
+                                Title = "Save Document"
+                            };
                             dlg.BeginSheet(Window, (rslt) =>
                             {
                                 if (rslt == 1)
@@ -54,7 +58,7 @@ namespace TextEditor.Classes
                                     Window.Close();
                                 }
                             });
-                            return true;
+                            return false;
                         }
                     case 1001:
                         //Lose changes
