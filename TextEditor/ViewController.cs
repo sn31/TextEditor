@@ -49,23 +49,6 @@ namespace TextEditor
         public override void ViewWillAppear()
         {
             base.ViewWillAppear();
-
-            // Set Window Title
-            this.View.Window.Title = "untitled";
-
-            View.Window.WillClose += (sender, e) => {
-                // is the window dirty?
-                if (DocumentEdited)
-                {
-                    var alert = new NSAlert()
-                    {
-                        AlertStyle = NSAlertStyle.Critical,
-                        InformativeText = "We need to give the user the ability to save the document here...",
-                        MessageText = "Save Document",
-                    };
-                    alert.RunModal();
-                }
-            };
         } 
 
         public override void AwakeFromNib()
