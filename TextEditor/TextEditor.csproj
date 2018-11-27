@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Classes\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -90,6 +91,7 @@
     <Compile Include="ExplorerViewController.designer.cs">
       <DependentUpon>ExplorerViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\EditorWindowDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
