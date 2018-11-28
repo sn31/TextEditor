@@ -129,6 +129,20 @@ namespace TextEditor
                 }
             }
         }
-      
+        public override bool OpenFile(NSApplication sender, string filename)
+        {
+            // Trap all errors
+            try
+            {
+                filename = filename.Replace(" ", "%20");
+                var url = new NSUrl("file://" + filename);
+                return OpenFile(url);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
