@@ -63,6 +63,28 @@ namespace TextEditor
             }
             SaveDocument();
         }
+
+        public NSPrintInfo PrintInfo { get; set; } = new NSPrintInfo();
+        [Action("runPageLayout:")]
+        public void RunPageLayout(NSObject sender)
+        {
+
+            // Define objects
+            var dlg = new NSPageLayout();
+
+            // Display dialog
+            dlg.BeginSheet(PrintInfo, Window, () => {
+                // Handle layout change
+            });
+
+        }
+
+        //[Action("print:")]
+        //public void PrintDocument(NSObject sender)
+        //{
+        //    var EditorViewController = AppDelegate.FindViewController(Window.ContentViewController) as ViewController;
+        //   EditorViewController.PrintDocument(PrintInfo);
+        //}
     }
 }
 
