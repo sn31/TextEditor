@@ -52,6 +52,17 @@ namespace TextEditor
         {
             SaveDocument();
         }
+        [Action("saveDocumentAs:")]
+        public void SaveDocumentAs(NSObject sender)
+        {
+            try {
+                Window.RepresentedUrl = null;
+            }
+            catch {
+                Console.WriteLine("something");
+            }
+            SaveDocument();
+        }
     }
 }
 
