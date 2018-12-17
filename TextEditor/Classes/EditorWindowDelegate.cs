@@ -2,6 +2,7 @@
 using AppKit;
 using System.IO;
 using Foundation;
+using TextEditor.Classes;
 
 namespace TextEditor
 {
@@ -32,34 +33,8 @@ namespace TextEditor
                 {
                     case 1000:
                         //Saving
-                        Console.WriteLine("Before defining the view controller");
-                        var viewController = AppDelegate.FindViewController(Window.ContentViewController) as ViewController;
-                        Console.WriteLine(viewController);
-                        if (Window.RepresentedUrl != null) {
-                            var path = Window.RepresentedUrl.Path;
-                            File.WriteAllText(path, viewController.Text);
-                            return true;
-                        }
-                        else {
-                            Console.WriteLine("Stuff needs to be saved");
-                            var dlg = new NSSavePanel
-                            {
-                                Title = "Save Document"
-                            };
-                            dlg.BeginSheet(Window, (rslt) =>
-                            {
-                                if (rslt == 1)
-                                {
-                                    var path = dlg.Url.Path;
-                                    File.WriteAllText(path, viewController.Text);
-                                    Window.DocumentEdited = false;
-                                    viewController.View.Window.SetTitleWithRepresentedFilename(Path.GetFileName(path));
-                                    viewController.View.Window.RepresentedUrl = dlg.Url;
-                                    Window.Close();
-                                }
-                            });
-                            return false;
-                        }
+                        return Utilities.SaveDocument(Window);
+
                     case 1001:
                         //Lose changes
                         return true;

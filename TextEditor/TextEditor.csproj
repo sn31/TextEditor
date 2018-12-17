@@ -91,6 +91,7 @@
       <DependentUpon>ExplorerViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\EditorWindowDelegate.cs" />
+    <Compile Include="Classes\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
