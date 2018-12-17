@@ -19,12 +19,21 @@ namespace TextEditor
             Window.Delegate = new EditorWindowDelegate(Window);
         }
         public void SaveDocument()
-        {
+        {   
             var EditorViewController = AppDelegate.FindViewController(Window.ContentViewController) as ViewController;
+            NSAttributedStringDocumentAttributes attributes = new NSAttributedStringDocumentAttributes();
+            attributes.DocumentType = NSDocumentType.RTF;
             if (Window.RepresentedUrl != null )
             {
+                NSError errors = new NSError();
+                NSRange range = new NSRange(0, EditorViewController.Text.Length);
+                var textSave = EditorViewController.TextStorage.GetFileWrapper(range, attributes,out errors);
                 var path = Window.RepresentedUrl.Path;
-                File.WriteAllText(path, EditorViewController.Text);
+                NSUrl currentUrl = Window.RepresentedUrl;
+               
+                textSave.Write(currentUrl, NSFileWrapperWritingOptions.Atomic, currentUrl, out errors);
+                
+                //File.WriteAllText(path, EditorViewController.Text);
             }
             else{
                 var dlg = new NSSavePanel()
