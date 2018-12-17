@@ -1,7 +1,6 @@
 ﻿using System;
 using AppKit;
 using Foundation;
-
 namespace TextEditor
 {
     public partial class ViewController : NSViewController
@@ -19,7 +18,11 @@ namespace TextEditor
                 // Update the view, if already loaded.
             }
         }
-
+        //NSTextStorage stuff
+        public NSTextStorage TextStorage
+        {
+            get { return DocumentEditor.TextStorage; }
+        }
         public bool DocumentEdited
         {
             get { return View.Window.DocumentEdited; }
@@ -50,7 +53,6 @@ namespace TextEditor
         {
             base.ViewWillAppear();
             this.View.Window.Title = "untitled";
-
         } 
 
         public override void AwakeFromNib()

@@ -97,8 +97,11 @@ namespace TextEditor
 
                 // Display
                 controller.ShowWindow(this);
-              
-                viewController.Text = File.ReadAllText(path); 
+                NSDictionary<NSString,NSObject> newDict = new NSDictionary<NSString, NSObject>();
+                NSError errors = new NSError();
+                NSAttributedStringDocumentAttributes attributes = new NSAttributedStringDocumentAttributes();
+                attributes.DocumentType = NSDocumentType.RTF;
+                viewController.TextStorage.ReadFromUrl(url, attributes, ref newDict, ref errors); 
                 viewController.View.Window.SetTitleWithRepresentedFilename(Path.GetFileName(path));
                 viewController.View.Window.RepresentedUrl = url;
 

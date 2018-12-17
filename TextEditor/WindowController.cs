@@ -19,12 +19,17 @@ namespace TextEditor
             Window.Delegate = new EditorWindowDelegate(Window);
         }
         public void SaveDocument()
-        {
+        {   
             var EditorViewController = AppDelegate.FindViewController(Window.ContentViewController) as ViewController;
+            NSAttributedStringDocumentAttributes attributes = new NSAttributedStringDocumentAttributes();
+            attributes.DocumentType = NSDocumentType.RTF;
+            NSError errors = new NSError();
+            NSRange range = new NSRange(0, EditorViewController.Text.Length);
+            NSUrl currentUrl = Window.RepresentedUrl;
             if (Window.RepresentedUrl != null )
             {
-                var path = Window.RepresentedUrl.Path;
-                File.WriteAllText(path, EditorViewController.Text);
+                var textSave = EditorViewController.TextStorage.GetFileWrapper(range, attributes,out errors);
+                textSave.Write(currentUrl, NSFileWrapperWritingOptions.Atomic, currentUrl, out errors);
             }
             else{
                 var dlg = new NSSavePanel()
@@ -36,7 +41,9 @@ namespace TextEditor
                     if (rslt == 1)
                     {
                         var path = dlg.Url.Path;
-                        File.WriteAllText(path, EditorViewController.Text);
+                        NSUrl newUrl = dlg.Url;
+                        var textSave = EditorViewController.TextStorage.GetFileWrapper(range, attributes, out errors);
+                        textSave.Write(newUrl, NSFileWrapperWritingOptions.Atomic, newUrl, out errors);
                         Window.DocumentEdited = false;
                         EditorViewController.View.Window.SetTitleWithRepresentedFilename(Path.GetFileName(path));
                         EditorViewController.View.Window.RepresentedUrl = dlg.Url;
