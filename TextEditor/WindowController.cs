@@ -41,8 +41,9 @@ namespace TextEditor
                     if (rslt == 1)
                     {
                         var path = dlg.Url.Path;
+                        NSUrl newUrl = dlg.Url;
                         var textSave = EditorViewController.TextStorage.GetFileWrapper(range, attributes, out errors);
-                        textSave.Write(currentUrl, NSFileWrapperWritingOptions.Atomic, currentUrl, out errors);
+                        textSave.Write(newUrl, NSFileWrapperWritingOptions.Atomic, newUrl, out errors);
                         Window.DocumentEdited = false;
                         EditorViewController.View.Window.SetTitleWithRepresentedFilename(Path.GetFileName(path));
                         EditorViewController.View.Window.RepresentedUrl = dlg.Url;
